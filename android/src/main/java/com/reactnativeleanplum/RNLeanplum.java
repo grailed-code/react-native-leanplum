@@ -20,8 +20,7 @@ import com.leanplum.Leanplum;
 import com.leanplum.LeanplumActivityHelper;
 import com.leanplum.LeanplumInbox;
 import com.leanplum.LeanplumInboxMessage;
-import com.leanplum.LeanplumPushService;
-import com.leanplum.NewsfeedMessage;
+import com.leanplum.annotations.Parser;
 
 import org.json.JSONObject;
 
@@ -72,8 +71,8 @@ public class RNLeanplum extends ReactContextBaseJavaModule {
     @ReactMethod
     public void start() {
         Leanplum.setApplicationContext(application);
+        Parser.parseVariables(application);
         LeanplumActivityHelper.enableLifecycleCallbacks(application);
-        LeanplumPushService.setGcmSenderId(LeanplumPushService.LEANPLUM_SENDER_ID);
         LeanplumInbox.disableImagePrefetching();
         Leanplum.start(application);
     }
@@ -98,7 +97,7 @@ public class RNLeanplum extends ReactContextBaseJavaModule {
             // super hacky: getting private property from a instance
             // Android SDK 2.2.3 getData always returns null
             try {
-                Field field = NewsfeedMessage.class.getDeclaredField("e");
+                Field field = LeanplumInboxMessage.class.getDeclaredField("e");
                 field.setAccessible(true);
                 ActionContext context = (ActionContext) field.get(message);
                 dataString = context.stringNamed("Data");
