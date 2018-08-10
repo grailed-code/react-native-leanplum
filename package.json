@@ -12,9 +12,7 @@
     "@semantic-release/changelog": "^2.1.1",
     "@semantic-release/git": "^6.0.1",
     "@types/react-native": "^0.46.7",
-    "semantic-release": "^15.6.0"
-  },
-  "dependencies": {
+    "semantic-release": "^15.6.0",
     "typescript": "^2.4.2"
   },
   "homepage": "https://github.com/brandingbrand/react-native-leanplum#readme",
@@ -49,7 +47,6 @@
   },
   "scripts": {
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "install": "../.bin/tsc src/index"
   },
   "types": "./typings/index.d.ts",
   "version": "0.1.1"
